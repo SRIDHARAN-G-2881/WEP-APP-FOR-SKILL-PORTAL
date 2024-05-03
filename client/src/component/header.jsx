@@ -51,8 +51,9 @@ export default function Header() {
         <Button>
           <FaMoon />
         </Button>
+        <Link to='/signin'>
         <Button className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white transition bg-opacity-100 hover:bg-opacity-75 focus:bg-opacity-75" >Sign in</Button>
-
+        </Link>
       </div>
       
       
