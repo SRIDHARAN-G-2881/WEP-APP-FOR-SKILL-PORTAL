@@ -18,12 +18,11 @@ export default function App() {
       <Route path='/nightskill'element={<Nightskill />}/>
       <Route path='/dayskill' element={<Dayskill></Dayskill>}/>
        <Route path="/" element={<Home/>} />
-       <Route path="/signin" element={<Signin />} />
+       <Route path="/signup" element={<Signin />} />
        <Route path="dashboard" element={<Dashboard />} />
-       <Route path="/signup" element={<Signup />} />
+       <Route path="/signin" element={<Signup />} />
        <Route path="/about" element={<About />} />
        <Route path="/project" element={<Project />} />
-
     </Routes>
     <Footer />
     

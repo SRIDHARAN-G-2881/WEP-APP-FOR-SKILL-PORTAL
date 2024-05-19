@@ -1,9 +1,14 @@
 
 
-export default function home() {
+const Home= () => {
+  const email = localStorage.getItem('email');
+
   return (
     <div>
-      <h1>home</h1>
+      <h1>Welcome, {email}</h1>
+      {/* Other content */}
     </div>
-  )
-}
+  );
+};
+
+export default Home;
