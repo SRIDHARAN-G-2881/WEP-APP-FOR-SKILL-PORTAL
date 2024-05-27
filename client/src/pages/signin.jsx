@@ -2,6 +2,7 @@
   import { useState } from 'react';
   import { Link} from "react-router-dom";
   import axios from 'axios';
+  import Oauth from "../component/Oauth";
   import { useDispatch ,useSelector} from "react-redux";
   import { singInsucess,signInfailer,signInstart } from "../redux/user/slice";
 
@@ -25,7 +26,7 @@
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('email', res.data.email);
           // Redirecting to home page
-          window.location.href = '/';
+          window.location.href = '/dashboard';
           dispatch(singInsucess())
         }
       } catch (error) {
@@ -61,6 +62,8 @@
               <Button className="px-9 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white" type='submit'>
                 Sign Up
               </Button>
+              <Oauth/>
+  
             </form>
             <div className="flext gap-2 text-sm mt-5">
               <span> Dont Have an account?</span>

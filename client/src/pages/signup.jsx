@@ -1,20 +1,18 @@
-import { Button, Label, TextInput } from "flowbite-react";
-import { useState } from 'react';
-import { Link } from "react-router-dom";
+import pic from './pic.png';
+import { Label } from 'flowbite-react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-
-export default function Signin() {
+import { useState } from 'react';
+import { Button, TextInput } from 'flowbite-react';
+import Oauth from '../component/Oauth';
+const Home = () => {
+ 
   const [formdata, setformdata] = useState({});
 
-  const handlechange = (e) => {
-    setformdata({ ...formdata, [e.target.id]: e.target.value });
-  };
-
-  console.log(formdata)
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/api/signup', {formdata});
+      const res = await axios.post('http://localhost:3000/api/signup', formdata);
       if (res.status === 200) {
         console.log('Data saved successfully');
       } else {
@@ -25,46 +23,70 @@ export default function Signin() {
     }
   };
 
+  const handlechange = (e) => {
+    setformdata({ ...formdata, [e.target.id]: e.target.value });
+  };
+
   return (
-    <div className="min-h-screen mt-20">
-      <div className="flex p-3 max-w-3xl mx-auto flex-col md:lex-row md:items-center gap-5">
-        {/* left */}
-        <div className="flex-1">
-          <Link to="/" className=" font-bold dark:text-white text-4xL">
-            <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">SKILL PORTAL</span>
-          </Link>
-          <p className="text-5m mt-5">
-            Knowledge is not skill. Knowledge plus ten thousand times is skill.
-          </p>
-        </div>
-        {/*Right*/}
-        <div className="flex-1">
-          <form className="flex flex-col gap-4" onSubmit={handlesubmit}>
-            <div>
-              <Label value="Your UserName" />
-              <TextInput type='text' placeholder="username" id="username" onChange={handlechange} />
-            </div>
-            <div>
-              <Label value="email" />
-              <TextInput type='email' placeholder="email" id="email" onChange={handlechange} />
-            </div>
-            <div>
-              <Label value="password" />
-              <TextInput type='password' placeholder="password" id="password" onChange={handlechange} />
-            </div>
-            <Button className="px-9 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white" type='submit'>
-              Sign Up
-            </Button>
-          </form>
-          <div className="flext gap-2 text-sm mt-5">
-            <span>Have an account?</span>
-            <Link to='/signup' className="text-blue-500">
-              Sign In
-            </Link>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="container mx-auto px-4 py-8 max-w-5xl">
+      <h1 className="text-2xl font-bold mb-6 text-center md:items-start md:space-y-5">WELCOME TO SKILL PORTAL</h1>
+        <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-20">
+          <div className="w-full md:w-1/2 flex justify-center md:justify-end mb-6 md:mb-0">
+            <img src={pic} className="w-full max-w-md h-auto" alt="Skill Portal" />
           </div>
-          <div></div>
+          <div className="w-full md:w-1/3">
+            <form className="flex flex-col gap-4" onSubmit={handlesubmit}>
+              <div>
+                <Label value="Your UserName" />
+                <TextInput
+                  type="text"
+                  placeholder="username"
+                  id="username"
+                  onChange={handlechange}
+                  className="mt-1 block w-full max-w-md"
+                />
+              </div>
+              <div>
+                <Label value="Email" />
+                <TextInput
+                  type="email"
+                  placeholder="email"
+                  id="email"
+                  onChange={handlechange}
+                  className="mt-1 block w-full max-w-md"
+                />
+              </div>
+              <div>
+                <Label value="Password" />
+                <TextInput
+                  type="password"
+                  placeholder="password"
+                  id="password"
+                  onChange={handlechange}
+                  className="mt-1 block w-full max-w-md"
+                />
+              </div>
+              <Button
+                className="px-5 py-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white mt-4 w-full max-w-md"
+                type="submit"
+              >
+                Sign Up
+              </Button>
+              <Oauth/>
+            
+            </form>
+            <div className="flex gap-2 text-sm mt-5 justify-center md:justify-start">
+              <span>Have an account?</span>
+              <Link to="/signin" className="text-blue-500">
+                Sign In
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Home;

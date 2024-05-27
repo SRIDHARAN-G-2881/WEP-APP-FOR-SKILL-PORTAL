@@ -13,14 +13,14 @@ export default function Header() {
       <div className="flex items-center">
         <Navbar.Collapse>
           <Navbar.Link>
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
             <Link to="/about">About</Link>
             <Link to="/dashboard">Dashboard</Link>
             <Link to="/project">Project</Link>
           </Navbar.Link>
         </Navbar.Collapse>
         <div className="flex items-center mx-40 gap-20" >
-          <Link to='/' > <Button color='black'>
+          <Link to='/home' > <Button color='black'>
           Home
       </Button>
       </Link>

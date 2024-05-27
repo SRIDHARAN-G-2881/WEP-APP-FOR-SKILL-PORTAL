@@ -1,8 +1,9 @@
-
+import Sidebar from "../component/slidebar"
 export default function dashboard() {
   return (
-    <div>
-      <h1>dashbiard</h1>
+
+    <div className="flex">
+        <Sidebar/>
     </div>
   )
 }
