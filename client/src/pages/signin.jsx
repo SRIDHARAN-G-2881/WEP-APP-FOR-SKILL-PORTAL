@@ -4,7 +4,7 @@
   import axios from 'axios';
   import Oauth from "../component/Oauth";
   import { useDispatch ,useSelector} from "react-redux";
-  import { singInsucess,signInfailer,signInstart } from "../redux/user/slice";
+  import { signInsuccess,signInfailer,signInstart } from "../redux/user/slice";
 
   export default function Signup() {
     const [formdata, setformdata] = useState({});
@@ -27,7 +27,7 @@
           localStorage.setItem('email', res.data.email);
           // Redirecting to home page
           window.location.href = '/dashboard';
-          dispatch(singInsucess())
+          dispatch(signInsuccess())
         }
       } catch (error) {
         dispatch(signInfailer(error.message));

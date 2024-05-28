@@ -13,7 +13,7 @@ const initialState = {
         state.loading=true;
         state.error=null;
       },
-      singInsucess:( state,action)=>{
+      signInsucess:( state,action)=>{
         state.currentuser=action.payload;
         state.loading=false;
         state.error=null;
@@ -24,7 +24,7 @@ const initialState = {
       },
     },
 });
-export const {singInsucess,signInfailer,signInstart} = userslice.actions;
+export const {signInsuccess,signInfailer,signInstart} = userslice.actions;
 export default userslice.reducer;
 
         
