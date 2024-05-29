@@ -4,10 +4,13 @@ import axios from 'axios';
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 import { app } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import { signInsuccess,signInfailer } from "../redux/user/slice";
+import {useDispatch} from 'react-redux'
 
 export default function Oauth() {
   const auth = getAuth(app);
   const navigate = useNavigate();
+  const dispatch=useDispatch();
 
   const handleGoogleClick = async () => {
     const provider = new GoogleAuthProvider();
@@ -24,9 +27,11 @@ export default function Oauth() {
       });
 
       if (res.status === 200) {
+        dispatch(signInsuccess(resultsFromGoogle.user));
         navigate('/home', { state: { displayName: resultsFromGoogle.user.displayName } });
       }
     } catch (error) {
+      dispatch(signInfailer(error));
       console.log(error);
     }
   };

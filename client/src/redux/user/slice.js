@@ -13,7 +13,7 @@ const initialState = {
         state.loading=true;
         state.error=null;
       },
-      signInsucess:( state,action)=>{
+      signInsuccess:( state,action)=>{
         state.currentuser=action.payload;
         state.loading=false;
         state.error=null;
