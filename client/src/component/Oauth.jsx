@@ -25,9 +25,10 @@ export default function Oauth() {
         email: resultsFromGoogle.user.email,
         googlePhotoUrl: resultsFromGoogle.user.photoURL,
       });
+      console.log(res);
 
       if (res.status === 200) {
-        dispatch(signInsuccess(resultsFromGoogle.user));
+        dispatch(signInsuccess(res.data));
         navigate('/home', { state: { displayName: resultsFromGoogle.user.displayName } });
       }
     } catch (error) {

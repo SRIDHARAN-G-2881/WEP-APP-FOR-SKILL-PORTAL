@@ -20,7 +20,11 @@ const userschema = new mongoose.Schema({
     type:String,
     required:false,
     default:"https://tse1.mm.bing.net/th?id=OIP.8li1g3WASRlQCpV6X54VCQHaHa&pid=Api&P=0&h=180",
-  }
+  },
+  isadmin:{
+    type:Boolean,
+    default:false,
+  },
 },
   { timestamps: true }
 )

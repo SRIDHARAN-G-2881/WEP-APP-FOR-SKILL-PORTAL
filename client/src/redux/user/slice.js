@@ -22,9 +22,14 @@ const initialState = {
         state.loading=false;
         state.error=action.payload;
       },
+      signOutsuccess:(state,action)=>{
+        state.currentuser=action.payload;
+        state.loading=false;
+        state.error=null;
+      }
     },
 });
-export const {signInsuccess,signInfailer,signInstart} = userslice.actions;
+export const {signInsuccess,signInfailer,signInstart,signOutsuccess} = userslice.actions;
 export default userslice.reducer;
 
         

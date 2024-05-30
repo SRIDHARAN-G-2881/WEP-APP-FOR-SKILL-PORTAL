@@ -25,6 +25,7 @@ export default function Header() {
           <Link to='/dashboard'><Button color='black'>Dashboard</Button></Link>
           <Link to='/nightskill' active={'/nightskill' === path}><Button color='black'>Night skill</Button></Link>
           <Link to='/dayskill'><Button color='black'>Dayskill</Button></Link>
+         
         </div>
         
       
