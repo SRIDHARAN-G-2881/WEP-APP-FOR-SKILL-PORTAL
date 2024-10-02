@@ -5,8 +5,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Button, TextInput } from 'flowbite-react';
 import Oauth from '../component/Oauth';
+
 const Home = () => {
- 
   const [formdata, setformdata] = useState({});
 
   const handlesubmit = async (e) => {
@@ -28,9 +28,9 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="container mx-auto px-4 py-8 max-w-5xl">
-      <h1 className="text-2xl font-bold mb-6 text-center md:items-start md:space-y-5">WELCOME TO SKILL PORTAL</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-200 to-gray-400">
+      <div className="container mx-auto px-4 py-8 max-w-5xl bg-white rounded-lg shadow-lg">
+        <h1 className="text-2xl font-bold mb-6 text-center">WELCOME TO SKILL PORTAL</h1>
         <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-20">
           <div className="w-full md:w-1/2 flex justify-center md:justify-end mb-6 md:mb-0">
             <img src={pic} className="w-full max-w-md h-auto" alt="Skill Portal" />
@@ -74,7 +74,6 @@ const Home = () => {
                 Sign Up
               </Button>
               <Oauth/>
-            
             </form>
             <div className="flex gap-2 text-sm mt-5 justify-center md:justify-start">
               <span>Have an account?</span>

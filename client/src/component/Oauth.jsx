@@ -4,13 +4,13 @@ import axios from 'axios';
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 import { app } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { signInsuccess,signInfailer } from "../redux/user/slice";
-import {useDispatch} from 'react-redux'
+import { signInsuccess, signInfailer } from "../redux/user/slice";
+import { useDispatch } from 'react-redux';
 
 export default function Oauth() {
   const auth = getAuth(app);
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const handleGoogleClick = async () => {
     const provider = new GoogleAuthProvider();
@@ -33,13 +33,16 @@ export default function Oauth() {
       }
     } catch (error) {
       dispatch(signInfailer(error));
-      console.log(error);
+      console.error('Error during Google sign-in:', error);
     }
   };
 
   return (
     <div>
-      <Button className="px-5 py-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white mt-4 w-full max-w-md" type="submit" outline onClick={handleGoogleClick}>
+      <Button
+        className="flex items-center px-5 py-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white mt-4 w-full max-w-md"
+        onClick={handleGoogleClick}
+      >
         <AiFillGoogleCircle className="w-6 h-6 mr-2" />
         Continue with Google
       </Button>

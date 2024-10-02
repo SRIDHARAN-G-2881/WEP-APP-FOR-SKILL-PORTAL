@@ -24,10 +24,11 @@ const userschema = new mongoose.Schema({
   isadmin:{
     type:Boolean,
     default:false,
+    required:false,
   },
 },
   { timestamps: true }
 )
 
-const usermodel = mongoose.model('hellos', userschema)
+const usermodel = mongoose.model('userdetails', userschema) 
 export default usermodel
