@@ -26,6 +26,11 @@ const userschema = new mongoose.Schema({
     default:false,
     required:false,
   },
+  isstaff:{
+    type:Boolean,
+    default:false,
+    required:false,  
+  },
 },
   { timestamps: true }
 )

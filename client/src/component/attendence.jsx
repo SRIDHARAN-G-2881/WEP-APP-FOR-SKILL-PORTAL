@@ -1,55 +1,85 @@
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function SkillRegistered() {
-  const [users, setUsers] = useState([]);
-  const [checkedUsers, setCheckedUsers] = useState({});
+  const [users, setUsers] = useState([]); // List of users
+  const [checkedUsers, setCheckedUsers] = useState({}); // Attendance states
+  const [loading, setLoading] = useState(false); // Loading state for form submission
+  const [error, setError] = useState(null); // Error state
   const navigate = useNavigate();
+  const current = useSelector((state) => state.user.currentuser); // Access current user from Redux
+  const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
 
+  // Fetch user data and attendance data
   useEffect(() => {
+    // Fetch users' data
     axios.get('http://localhost:3000/api/getuser')
       .then(response => {
-        console.log('Fetched data:', response.data);
         if (Array.isArray(response.data)) {
           setUsers(response.data);
         } else {
           console.error('Fetched data is not an array:', response.data);
         }
       })
-      .catch(err => console.log(err));
-  }, []);
+      .catch(err => console.error('Error fetching users:', err));
+
+    // Fetch attendance data for the current date
+    axios.get(`http://localhost:3000/api/attendance/${currentDate}`)
+      .then(response => {
+        const attendanceData = response.data;
+
+        // Update checkedUsers state based on attendance data
+        const updatedCheckedUsers = {};
+        attendanceData.forEach(record => {
+          updatedCheckedUsers[record.userId] = record.status;
+        });
+        setCheckedUsers(updatedCheckedUsers);
+      })
+      .catch(err => console.error('Error fetching attendance:', err));
+  }, [currentDate]);
 
   // Handle checkbox change for each user
   const handleCheckboxChange = (id) => {
-    setCheckedUsers(prevChecked => ({
-      ...prevChecked,
-      [id]: !prevChecked[id], // Toggle the checkbox state
-    }));
+    console.log(current);
+    if (current.isadmin || current.isstaff) {
+      setCheckedUsers(prevChecked => ({
+        ...prevChecked,
+        [id]: !prevChecked[id], // Toggle the checkbox state
+      }));
+    }
   };
 
   // Handle form submission
   const handleSubmit = async () => {
-    const attendances = users.map(user => ({
-      name: user.name,
-      status: checkedUsers[user._id] || false, // True if checked, false if not
-    }));
-
-    console.log("Submitting attendances: ", attendances);
-
+    console.log("Current date is:", currentDate);
+    setLoading(true);
+    setError(null);
     try {
-      const res = await axios.post('http://localhost:3000/api/attendences', attendances);
+      const attendances = users.map(user => ({
+        userId: user._id,
+        name: user.name, // Include the name field
+        status: checkedUsers[user._id] || false,
+      }));
+  
+      const res = await axios.put(`http://localhost:3000/api/attendance/${currentDate}`, attendances);
       if (res.status === 200) {
-        console.log("Attendance data saved successfully");
-        navigate('/dashboard');
+        console.log('Attendance data updated successfully');
+        navigate('/dashboard'); // Redirect to the dashboard
       } else {
-        console.log("Unexpected status code:", res.status);
+        throw new Error(`Unexpected response status: ${res.status}`);
       }
     } catch (error) {
-      console.log("Error:", error.message);
+      console.error('Error submitting attendance:', error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
+  
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-gray-50 to-gray-100 py-8">
@@ -74,6 +104,7 @@ export default function SkillRegistered() {
                         type="checkbox"
                         checked={checkedUsers[user._id] || false}
                         onChange={() => handleCheckboxChange(user._id)}
+                        disabled={!(current.isadmin || current.isstaff)} // Disable for non-admin/staff
                       />
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
@@ -89,8 +120,17 @@ export default function SkillRegistered() {
             </tbody>
           </table>
         </div>
+        {error && <div className="text-red-500 mt-4">{error}</div>}
       </div>
-      <Button className='bg-slate-700 ml-5' onClick={handleSubmit}>SUBMIT</Button>
+      {(current.isadmin || current.isstaff) && (
+        <Button
+          className="bg-slate-700 ml-5 mt-4"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {loading ? "Submitting..." : "SUBMIT"}
+        </Button>
+      )}
     </div>
   );
 }

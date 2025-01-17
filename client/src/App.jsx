@@ -9,11 +9,11 @@ import Privaterouter from './component/privaterouter'
 import About from './pages/about'
 import Header from './component/header'
 import Attendence from './component/attendence'
-import Nightskill from './pages/nightskill'
-import Dayskill from './pages/dayskill'
+import Nightskill from './component/Nightskill'
+import Dayskill from './component/Dayskill'
 import Skillregistered from './pages/skillregistered'
 import Assignstaff from './pages/assignstaff'
-import Ongoing from './pages/ongoing'
+import Ongoing from './component/ongoing'
 import Editattendence from './pages/editAttendence'
 export default function App() {
   return (
@@ -32,7 +32,7 @@ function Main() {
   <Routes>
     
     <Route path="editattendence" element={<Editattendence></Editattendence>}></Route>
-    <Route path='nightskill'element={<Nightskill />}/>
+    <Route path='/nightskill'element={<Nightskill />}/>
     <Route path='/dayskill' element={<Dayskill></Dayskill>}/>
      <Route path="/home" element={<Home/>} />
      <Route path="/attendence" element={<Attendence/>}/>

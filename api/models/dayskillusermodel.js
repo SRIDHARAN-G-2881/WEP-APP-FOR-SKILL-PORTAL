@@ -16,12 +16,7 @@ const userschema = new mongoose.Schema({
     required: false,
     unique: false,
   },
-  attendence: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'attendence', // Reference to the attendence collection
-    }
-  ]
+ 
 }, { timestamps: true });
 
 const dayskillusermodel = mongoose.model('dayskill', userschema);
