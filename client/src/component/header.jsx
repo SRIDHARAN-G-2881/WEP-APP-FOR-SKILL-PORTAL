@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <Navbar className="border-b-0 justify-between items-center bg-gradient-to-r from-blue-100 to-blue-300 py-4">
       <Link to="/" className="whitespace-nowrap text-sm sm:text-xl font-semibold text-white">
-        <span className="px-2 py-1 bg-green-600">
+        <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg">
           SKILL PORTAL
         </span>
       </Link>
@@ -24,19 +24,19 @@ export default function Header() {
         </Navbar.Collapse>
         <div className="flex items-center mx-40 gap-4">
           <Link to='/home'>
-            <Button className="bg-blue-700 hover:bg-blue-800 text-white">Home</Button>
+            <Button className="bg-blue-700 hover:border-4 border-gray-800 text-white">Home</Button>
           </Link>
           <Link to='/about'>
-            <Button className="bg-blue-700 hover:bg-blue-800 text-white">About</Button>
+            <Button className="bg-blue-700 hover:border-4 border-gray-800 text-white">About</Button>
           </Link>
           <Link to='/dashboard'>
-            <Button className=" bg-blue-700 text-white">Dashboard</Button>
+            <Button className=" bg-blue-700 hover:border-4 border-gray-800 text-white">Dashboard</Button>
           </Link>
           <Link to='/nightskill' active={'/nightskill' === path}>
-            <Button className="bg-blue-700 hover:bg-blue-800 text-white">Night Skill</Button>
+            <Button className="bg-blue-700 hover:border-4 border-gray-800 text-white">Night Skill</Button>
           </Link>
           <Link to='/dayskill'>
-            <Button className="bg-blue-700 hover:bg-blue-800 text-white">Day Skill</Button>
+            <Button className="bg-blue-700 hover:border-4 border-gray-800 text-white">Day Skill</Button>
           </Link>
         </div>
 

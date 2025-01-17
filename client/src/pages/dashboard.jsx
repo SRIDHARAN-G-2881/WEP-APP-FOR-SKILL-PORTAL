@@ -1,34 +1,31 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from "react";
-import Sidebar from "../component/Dashslidebar";
+import DashSidebar from "../component/Dashslidebar"; // Ensure your sidebar component is named and imported correctly
 import Dashprofile from "../component/Dashprofile";
 import { useLocation } from "react-router-dom";
 
 export default function Dashboard() {
   const location = useLocation();
-  const [tab, setTab] = useState('');
+  const [tab, setTab] = useState("");
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const tabFromUrl = urlParams.get('tab');
+    const tabFromUrl = urlParams.get("tab");
     if (tabFromUrl) {
       setTab(tabFromUrl);
     }
   }, [location.search]);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Sidebar with Enforced Background Color */}
-      <div
-        className="md:w-56 bg-blue-900 text-white shadow-lg"
-        style={{ backgroundColor: '#1E3A8A' }} // Fallback to ensure the color
-      >
-        <Sidebar />
+    <div className="flex min-h-screen bg-gray-900">
+      {/* Sidebar */}
+      <div className="w-1/4 fixed top-0 left-0 h-full shadow-lg bg-gray-800">
+        <DashSidebar />
       </div>
-      
+
       {/* Main Content Area */}
-      <div className="flex-1 p-6 bg-gray-100 flex justify-center items-center">
-        {tab === 'profile' ? (
+      <div className="flex-1 ml-1/4 p-6 overflow-y-auto bg-gray-100">
+        {tab === "profile" ? (
           <Dashprofile />
         ) : (
           <div className="text-center">
@@ -38,7 +35,9 @@ export default function Dashboard() {
               alt="Placeholder"
               className="w-3/4 mx-auto mb-5 rounded-lg shadow-md"
             />
-            <h2 className="text-2xl font-bold text-gray-700">Welcome to your Dashboard</h2>
+            <h2 className="text-2xl font-bold text-gray-700">
+              Welcome to your Dashboard
+            </h2>
             <p className="text-gray-600 mt-2">
               Select a tab from the sidebar to get started.
             </p>

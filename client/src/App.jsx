@@ -14,12 +14,12 @@ import Dayskill from './pages/dayskill'
 import Skillregistered from './pages/skillregistered'
 import Assignstaff from './pages/assignstaff'
 import Ongoing from './pages/ongoing'
+import Editattendence from './pages/editAttendence'
 export default function App() {
   return (
     <BrowserRouter>
     <Main/>
- 
-    
+
     </BrowserRouter>
   )
 }
@@ -28,9 +28,10 @@ function Main() {
   const path = location.pathname === '/';
   return(
     <div>
-  {!path && <Header/>};
-    
+      {!path&&<Header></Header>}
   <Routes>
+    
+    <Route path="editattendence" element={<Editattendence></Editattendence>}></Route>
     <Route path='nightskill'element={<Nightskill />}/>
     <Route path='/dayskill' element={<Dayskill></Dayskill>}/>
      <Route path="/home" element={<Home/>} />
