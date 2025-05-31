@@ -54,7 +54,7 @@ export default function About() {
         </div>
         <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition">
           <h2 className="text-2xl font-semibold text-purple-800">C++</h2>
-          <p className="text-gray-600 mt-2">Master C++ for high-performance programming</p>
+          <p className="text-gray-600 mt-2">Master C++ for high-performance programming and built an application</p>
           <a href="https://cpp-course.com" className="mt-4 inline-block text-blue-500 font-bold">
             Get Experience
           </a>
